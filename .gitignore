@@ -100,3 +100,15 @@ batch_games/
 # Temporary files
 *.tmp
 *.temp
+
+# Large media files
+*.mp3
+*.wav
+*.mp4
+*.avi
+*.mov
+
+# Large binary files
+*.dylib
+*.so
+*.dll
