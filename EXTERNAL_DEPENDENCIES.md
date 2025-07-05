@@ -7,11 +7,24 @@ This project includes code from two external GitHub repositories:
 
 ## Current Setup
 
-The external repositories are currently included as direct copies in the `AI_Diplomacy/` and `verifiers/` directories.
+The external repositories are currently included as **Git subtrees**, which allows easy updates while maintaining your own repository structure.
 
 ## Getting Updates from External Repositories
 
-Since we've included these as direct copies rather than git subtrees, here's how to manually update them:
+Since we're using Git subtrees, you can easily pull updates with simple commands:
+
+### Simple Update Commands
+
+```bash
+# Update AI_Diplomacy
+git subtree pull --prefix=AI_Diplomacy --squash https://github.com/EveryInc/AI_Diplomacy.git main
+
+# Update verifiers  
+git subtree pull --prefix=verifiers --squash https://github.com/willccbb/verifiers.git main
+
+# Or use the convenience script
+./update_external_deps.sh
+```
 
 ### Option 1: Manual Update Process
 

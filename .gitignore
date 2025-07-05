@@ -112,3 +112,6 @@ batch_games/
 *.dylib
 *.so
 *.dll
+
+# Claude code
+.claude
