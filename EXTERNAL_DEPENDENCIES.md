@@ -26,78 +26,45 @@ git subtree pull --prefix=verifiers --squash https://github.com/willccbb/verifie
 ./update_external_deps.sh
 ```
 
-### Option 1: Manual Update Process
+### Alternative: Manual Update Process (Legacy)
+
+If you need to update manually for any reason:
 
 1. **For AI_Diplomacy:**
    ```bash
-   # Backup any local changes you made
-   cp -r AI_Diplomacy AI_Diplomacy_backup
-   
-   # Remove the current directory
-   rm -rf AI_Diplomacy
-   
-   # Clone the latest version
-   git clone https://github.com/aiwaves-cn/AI_Diplomacy.git
-   
-   # Remove the .git directory to prevent conflicts
-   rm -rf AI_Diplomacy/.git
-   
-   # Review changes and restore any local modifications
-   # Then commit the updates
-   git add AI_Diplomacy
-   git commit -m "Update AI_Diplomacy to latest version"
+   git subtree pull --prefix=AI_Diplomacy --squash https://github.com/EveryInc/AI_Diplomacy.git main
    ```
 
 2. **For verifiers:**
    ```bash
-   # Backup any local changes you made
-   cp -r verifiers verifiers_backup
-   
-   # Remove the current directory
-   rm -rf verifiers
-   
-   # Clone the latest version
-   git clone https://github.com/aiwaves-cn/verifiers.git
-   
-   # Remove the .git directory to prevent conflicts
-   rm -rf verifiers/.git
-   
-   # Review changes and restore any local modifications
-   # Then commit the updates
-   git add verifiers
-   git commit -m "Update verifiers to latest version"
+   git subtree pull --prefix=verifiers --squash https://github.com/willccbb/verifiers.git main
    ```
 
-### Option 2: Convert to Git Subtrees (Recommended for Future)
+### Convert Back to Regular Directories (If Needed)
 
-If you want to use Git subtrees for easier management, you can convert the current setup:
+If you ever need to convert back to regular directories:
 
-1. **First, remove the current directories and set up subtrees:**
+1. **Remove subtree tracking:**
    ```bash
    # Remove current directories
    git rm -r AI_Diplomacy verifiers
-   git commit -m "Remove directories before converting to subtrees"
+   git commit -m "Remove subtrees"
    
-   # Add as subtrees
-   git subtree add --prefix=AI_Diplomacy --squash https://github.com/aiwaves-cn/AI_Diplomacy.git main
-   git subtree add --prefix=verifiers --squash https://github.com/aiwaves-cn/verifiers.git main
-   ```
-
-2. **Then to update in the future:**
-   ```bash
-   # Update AI_Diplomacy
-   git subtree pull --prefix=AI_Diplomacy --squash https://github.com/aiwaves-cn/AI_Diplomacy.git main
+   # Clone as regular directories
+   git clone https://github.com/EveryInc/AI_Diplomacy.git
+   git clone https://github.com/willccbb/verifiers.git
+   rm -rf AI_Diplomacy/.git verifiers/.git
    
-   # Update verifiers
-   git subtree pull --prefix=verifiers --squash https://github.com/aiwaves-cn/verifiers.git main
+   git add AI_Diplomacy verifiers
+   git commit -m "Add external dependencies as regular directories"
    ```
 
 ## Repository Information
 
-- **AI_Diplomacy Repository:** https://github.com/aiwaves-cn/AI_Diplomacy
-- **verifiers Repository:** https://github.com/aiwaves-cn/verifiers
+- **AI_Diplomacy Repository:** https://github.com/EveryInc/AI_Diplomacy
+- **verifiers Repository:** https://github.com/willccbb/verifiers  
 - **Your Repository:** https://github.com/OzDuys/diplomacy_self_play
-- **Last Updated:** July 5, 2025 (initial inclusion)
+- **Last Updated:** July 5, 2025 (converted to Git subtrees)
 
 ## Local Modifications
 

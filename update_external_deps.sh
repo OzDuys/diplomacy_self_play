@@ -1,58 +1,24 @@
 #!/bin/bash
 
-# Script to update external dependencies
+# Script to update external dependencies using Git subtrees
 # Usage: ./update_external_deps.sh [ai_diplomacy|verifiers|all]
 
 set -e
 
 update_ai_diplomacy() {
-    echo "Updating AI_Diplomacy..."
+    echo "Updating AI_Diplomacy using Git subtree..."
     
-    # Check if there are any local modifications
-    if [ -d "AI_Diplomacy" ]; then
-        echo "Backing up current AI_Diplomacy directory..."
-        cp -r AI_Diplomacy AI_Diplomacy_backup_$(date +%Y%m%d_%H%M%S)
-        
-        # Remove current directory
-        echo "Removing current AI_Diplomacy directory..."
-        rm -rf AI_Diplomacy
-    fi
-    
-    # Clone the latest version
-    echo "Cloning latest AI_Diplomacy..."
-    git clone https://github.com/aiwaves-cn/AI_Diplomacy.git
-    
-    # Remove .git directory
-    echo "Removing .git directory..."
-    rm -rf AI_Diplomacy/.git
+    git subtree pull --prefix=AI_Diplomacy --squash https://github.com/EveryInc/AI_Diplomacy.git main
     
     echo "AI_Diplomacy updated successfully!"
-    echo "Please review changes and commit them with: git add AI_Diplomacy && git commit -m 'Update AI_Diplomacy to latest version'"
 }
 
 update_verifiers() {
-    echo "Updating verifiers..."
+    echo "Updating verifiers using Git subtree..."
     
-    # Check if there are any local modifications
-    if [ -d "verifiers" ]; then
-        echo "Backing up current verifiers directory..."
-        cp -r verifiers verifiers_backup_$(date +%Y%m%d_%H%M%S)
-        
-        # Remove current directory
-        echo "Removing current verifiers directory..."
-        rm -rf verifiers
-    fi
-    
-    # Clone the latest version
-    echo "Cloning latest verifiers..."
-    git clone https://github.com/aiwaves-cn/verifiers.git
-    
-    # Remove .git directory
-    echo "Removing .git directory..."
-    rm -rf verifiers/.git
+    git subtree pull --prefix=verifiers --squash https://github.com/willccbb/verifiers.git main
     
     echo "verifiers updated successfully!"
-    echo "Please review changes and commit them with: git add verifiers && git commit -m 'Update verifiers to latest version'"
 }
 
 # Main script logic
@@ -77,8 +43,9 @@ case "$1" in
 esac
 
 echo ""
-echo "Update complete! Don't forget to:"
-echo "1. Review the changes"
-echo "2. Test your integration"
-echo "3. Commit the updates to your repository"
+echo "Update complete! The changes have been automatically committed."
+echo "Don't forget to:"
+echo "1. Review the changes with: git log --oneline -3"
+echo "2. Test your integration"  
+echo "3. Push to your repository: git push"
 echo "4. Update EXTERNAL_DEPENDENCIES.md with the update date"
